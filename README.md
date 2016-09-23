@@ -11,4 +11,4 @@ Two nightly dumps are made to AWS S3:
 Run time: approximately 2 minutes.
 
 ## Audits
-Checksum audits are pending release and implementation of Fedora 4.6.
+Fixity checks are performed daily.  Logs of both successful audits and failures are posted to the repo.
