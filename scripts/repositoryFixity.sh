@@ -39,14 +39,14 @@ if [ -f /tmp/fixityErrors.log ]
 		cat /tmp/fixityErrors.log | grep -e "<rdf:Description rdf:about=" -e "sha1" | grep -v fixity >> /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
 		cd /opt/Fedora-Backup-Documentation/
 		git add /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
-		ERRORS=$(wc -l < /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log)
+		ERRORS=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log | wc -l)
 	else
 		# Some items failed the fixity check
 		echo "No errors!"
 		touch /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
 		cd /opt/Fedora-Backup-Documentation/
 		git add /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
-		ERRORS=$(wc -l < /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log)
+		ERRORS=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log | wc -l)
 		echo "Fixity checks on $SERVER_URL failed for $ERRORS items.  See: https://github.com/gwu-libraries/Fedora-Backup-Documentation/tree/master/fixityErrors/$YESTERDAY-fixityErrors.log for more details" | mail -s "Fixity checks failed for $ERRORS items" $EMAILS
 fi
 
