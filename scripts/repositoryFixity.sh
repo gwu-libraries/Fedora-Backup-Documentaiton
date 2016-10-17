@@ -11,7 +11,7 @@ GITHUB_CREDENTIALS=
 # Record items that passed the fixity check
 if [ -f /tmp/fixitySuccess.log ]
 	then
-		cat /tmp/fixitySuccess.log | grep "<rdf:Description rdf:about=" | grep -v fixity >> /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log
+		cat /tmp/fixitySuccess.log | grep -e "<rdf:Description rdf:about=" -e "sha1" | grep -v fixity >> /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log
 		cd /opt/Fedora-Backup-Documentation/
 		git pull
 		git add /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log
@@ -28,7 +28,7 @@ fi
 # Record items that failed the fixity check
 if [ -f /tmp/fixityErrors.log ]
 	then
-		cat /tmp/fixityErrors.log | grep "<rdf:Description rdf:about=" | grep -v fixity >> /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
+		cat /tmp/fixityErrors.log | grep -e "<rdf:Description rdf:about=" -e "sha1" | grep -v fixity >> /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
 		cd /opt/Fedora-Backup-Documentation/
 		git add /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log
 		ERRORS=$(wc -l < /opt/Fedora-Backup-Documentation/fixityErrors/$YESTERDAY-fixityErrors.log)
