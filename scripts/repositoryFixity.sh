@@ -17,7 +17,7 @@ if [ -f /tmp/fixitySuccess.log ]
 		cd /opt/Fedora-Backup-Documentation/
 		git pull
 		git add /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log
-		SUCCESSES=$(wc -l < /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log)
+		SUCCESSES=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log | wc -l)
 	else
 		# No items passed the fixity check
 		echo "Problems!"
@@ -25,7 +25,7 @@ if [ -f /tmp/fixitySuccess.log ]
 		cd /opt/Fedora-Backup-Documentation/
 		git pull
 		git add /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log
-		SUCCESSES=$(wc -l < /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log)
+		SUCCESSES=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixitySuccesses/$YESTERDAY-fixitySuccesses.log | wc -l)
 fi
 
 # Push successful fixity results to Github repo
