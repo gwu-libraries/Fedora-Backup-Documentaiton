@@ -11,7 +11,7 @@ Two nightly dumps are made to AWS S3:
 Run time: approximately 2 minutes.
 
 ## Audits
-Fixity checks are performed daily. Logs of audits, including successes and errors, are written to the repo nightly. 
+Audits (also known as fixity checks) are performed daily to ensure that content in the digital repository has not been altered. These audits "fingerprint" every file in the repository using SHA-1, compare that fingerprint with the fingerprint on record, and report out confirmation of the files that haven't changed (success logs) and lists of any files that have changed (error logs). The audit logs are written to the repo nightly. 
 
 ### Success files [/fixitySuccesses](/fixitySuccesses)
 A log of all files whose audit checks were successful (checksum unchanged) appears in /fixitySuccesses/YYYY/MM/YYYYMMDD-fixitySuccesses.log . Each daily log file includes an inventory of all  files in the Fedora repository, including the file path and SHA-1 hash. The audit is performed on all files, including thumbnails, full text (OCR) text files, characterization/metadata files, and content files themselves. These logs are committed with a message that summarizes the number of successes and errors: 
