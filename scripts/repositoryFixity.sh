@@ -53,7 +53,7 @@ fi
 
 # Push successful fixity results to Github repo
 cd /opt/Fedora-Backup-Documentation/
-git commit -m "Repository fixity results for $YESTERDAY there were $SUCCESSES successful checks."
+git commit -m "$SERVER_URL fixity results for $YESTERDAY there were $SUCCESSES successful checks."
 git push $GITHUB_CREDENTIALS
 
 # Record items that failed the fixity check
@@ -75,7 +75,7 @@ fi
 
 # Push fixity error results to Github repo
 cd /opt/Fedora-Backup-Documentation/
-git commit -m "Repository fixity results for $YESTERDAY there were $ERRORS errors."
+git commit -m "$SERVER_URL fixity results for $YESTERDAY there were $ERRORS errors."
 git push $GITHUB_CREDENTIALS
 
 # Clean up logs from the previous day
