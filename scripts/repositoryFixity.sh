@@ -49,6 +49,7 @@ if [ -f /tmp/fixitySuccess.log ]
 		git pull
 		git add /opt/Fedora-Backup-Documentation/fixitySuccesses/$YEAR/$MONTH/$YESTERDAY-fixitySuccesses.log
 		SUCCESSES=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixitySuccesses/$YEAR/$MONTH/$YESTERDAY-fixitySuccesses.log | wc -l)
+		echo "Fixity checks were not performed on $SERVER_URL.  Please investigate." | mail -s "Fixity checks failed to run on $SERVER_URL" $EMAIL
 fi
 
 # Push successful fixity results to Github repo
@@ -63,6 +64,7 @@ if [ -f /tmp/fixityErrors.log ]
 		cd /opt/Fedora-Backup-Documentation/
 		git add /opt/Fedora-Backup-Documentation/fixityErrors/$YEAR/$MONTH/$YESTERDAY-fixityErrors.log
 		ERRORS=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixityErrors/$YEAR/$MONTH/$YESTERDAY-fixityErrors.log | wc -l)
+		echo "Fixity checks on $SERVER_URL failed for $ERRORS items.  See: https://github.com/gwu-libraries/Fedora-Backup-Documentation/tree/master/fixityErrors/$YEAR/$MONTH/$YESTERDAY-fixityErrors.log for more details" | mail -s "Fixity checks failed for $ERRORS items" $EMAIL
 	else
 		# Some items failed the fixity check
 		echo "No errors!"
@@ -70,7 +72,6 @@ if [ -f /tmp/fixityErrors.log ]
 		cd /opt/Fedora-Backup-Documentation/
 		git add /opt/Fedora-Backup-Documentation/fixityErrors/$YEAR/$MONTH/$YESTERDAY-fixityErrors.log
 		ERRORS=$(grep -e "<rdf:Description rdf:about=" /opt/Fedora-Backup-Documentation/fixityErrors/$YEAR/$MONTH/$YESTERDAY-fixityErrors.log | wc -l)
-		echo "Fixity checks on $SERVER_URL failed for $ERRORS items.  See: https://github.com/gwu-libraries/Fedora-Backup-Documentation/tree/master/fixityErrors/$YEAR/$MONTH/$YESTERDAY-fixityErrors.log for more details" | mail -s "Fixity checks failed for $ERRORS items" $EMAILS
 fi
 
 # Push fixity error results to Github repo
